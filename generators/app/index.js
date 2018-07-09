@@ -2,7 +2,8 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
-const basedir = __dirname;
+const path = require('path');
+const basedir = path.basename(process.cwd());
 
 module.exports = class extends Generator {
   constructor(args, opts) {
@@ -20,7 +21,7 @@ module.exports = class extends Generator {
         type: 'input',
         name: 'name',
         message: 'Your plugin name',
-        default: this.options.appname ? this.options.appname : this.appname
+        default: this.options.appname ? this.options.appname : basedir
       },
       {
         type: 'input',
@@ -43,7 +44,10 @@ module.exports = class extends Generator {
       {
         type: 'input',
         name: 'shortName',
-        message: 'Short, one-word name for your plugin'
+        message: 'Short, one-word name for your plugin',
+        validate: str => {
+          return str.split(' ').length === 1 ? true : 'Your shortname must be one word long';
+        }
       },
       {
         type: 'confirm',
@@ -77,8 +81,8 @@ module.exports = class extends Generator {
       }
     );
 
-    this.fs.copyTpl(this.templatePath('hooks.py'), this.destionationPath('hooks.py'), {
-      pathName: basedir,
+    this.fs.copyTpl(this.templatePath('hooks.py'), this.destinationPath('hooks.py'), {
+      dirName: basedir,
       shortName: this.props.shortName
     });
 
@@ -113,9 +117,5 @@ module.exports = class extends Generator {
         pluginName: this.props.name
       }
     );
-  }
-
-  install() {
-    this.installDependencies();
   }
 };

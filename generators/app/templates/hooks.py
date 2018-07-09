@@ -1,5 +1,5 @@
 from utils import models, setting_handler
-from plugins.<%= pathName %> import plugin_settings # fix so that looks at current directory name
+from plugins.<%= dirName %> import plugin_settings # fix so that looks at current directory name
 
 from django.shortcuts import render
 
@@ -11,4 +11,4 @@ def inject_<%= shortName %>(context):
     if not enabled.value:
         return ''
 
-    return render(request, '<%= shortName %>/inject.html')
+    return render(request, '<%= dirName %>/inject.html')

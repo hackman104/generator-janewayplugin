@@ -80,6 +80,9 @@
       "prettier"
     ]
   },
-  "repository": "hackman104/generator-janewayplugin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hackman104/generator-janewayplugin.git"
+  },
   "license": "MIT"
 }
