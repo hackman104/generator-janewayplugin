@@ -86,7 +86,7 @@ module.exports = class extends Generator {
       shortName: this.props.shortName
     });
 
-    this.fs.copyTpl(this.templatePath('init.py'), this.destinationPath('init.py'), {});
+    this.fs.copyTpl(this.templatePath('__init__.py'), this.destinationPath('__init__.py'), {});
 
     this.fs.copyTpl(this.templatePath('urls.py'), this.destinationPath('urls.py'), {
       dirName: basedir,
